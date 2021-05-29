@@ -1,0 +1,25 @@
+.container {
+  padding: 0.75rem 0;
+}
+
+.container:first-child {
+  padding-top: 0;
+}
+
+.container:last-child {
+  padding-bottom: 0;
+}
+
+.container:not(:last-child) {
+  border-bottom: 1px solid grey;
+}
+
+.container > * {
+  display: block;
+}
+
+.description {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: grey;
+}

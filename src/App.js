@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 
 import DefaultLayout from "./layout/DefaultLayout";
-import TodoListPage from "./pages/TodoList";
+import AllTodoPage from "./pages/AllTodo";
 import AddTodoPage from "./pages/AddTodo";
 import TodayTodos from "./pages/TodayTodos";
 
@@ -10,7 +10,7 @@ function App() {
     <DefaultLayout>
       <Switch>
         <Route path="/" exact>
-          <TodoListPage />
+          <AllTodoPage />
         </Route>
         <Route path="/new-todo">
           <AddTodoPage />
