@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import baseUrl from '../api/baseUrl';
 import TodoList from '../components/TodoList';
 
 function AllTodoPage () {
+  const history = useHistory();
+
   const [isLoading, setIsLoading] = useState(true);
   const [todos, setTodos] = useState([]);
 
-  useEffect(() => {
+  function loadTodos() {
     setIsLoading(true);
     fetch(
       `${baseUrl}/todos.json`
@@ -30,6 +33,26 @@ function AllTodoPage () {
         setIsLoading(false);
         setTodos(todos);
       });
+  }
+
+  function onDelete(id) {
+    setIsLoading(true);
+    fetch(
+      `${baseUrl}/todos/${id}.json`,
+      {
+        method: 'DELETE',
+      }
+    ).then(() => {
+      loadTodos()
+    });;
+  }
+
+  function onEdit() {
+    history.replace('/edit-todo')
+  }
+
+  useEffect(() => {
+    loadTodos()
   }, []);
 
   if (isLoading) {
@@ -43,7 +66,7 @@ function AllTodoPage () {
   return (<div>
     <h1>Your to do list</h1>
 
-    <TodoList todos={todos} />
+    <TodoList todos={todos} onEdit={onEdit} onDelete={onDelete} />
   </div>)
 };
 
