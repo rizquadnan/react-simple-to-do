@@ -1,5 +1,5 @@
 function TodayTodosPage () {
-  return <h1>Today todo page</h1>
+  return <h1>Edit todo page</h1>
 };
 
 export default TodayTodosPage;

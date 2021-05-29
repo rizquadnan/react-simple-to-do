@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 
+import Button from './Button';
 import classes from './TodoForm.module.css';
 
 function TodoForm(props) {
@@ -34,7 +35,7 @@ function TodoForm(props) {
       </div>
 
       <div className={classes.actions}>
-        <button>Add Todo</button>
+        <Button>Add Todo</Button>
       </div>
     </form>
   )

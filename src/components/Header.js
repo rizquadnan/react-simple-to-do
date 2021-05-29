@@ -5,7 +5,7 @@ import classes from './Header.module.css';
 function Header() {
   return (
     <header className={classes.container}>
-      <span className={classes.title}>React To dos</span>
+      <span className={classes.title}>React to dos</span>
       <nav>
         <ul className={classes['navigation-list']}>
           <li className={classes['navigation-item']}>
@@ -15,7 +15,7 @@ function Header() {
             <Link to='/new-todo'>Add new to do</Link>
           </li>
           <li className={classes['navigation-item']}>
-            <Link to='/today'>Today to dos</Link>
+            <Link to='/edit-todo'>Edit to do</Link>
           </li>
         </ul>
       </nav>

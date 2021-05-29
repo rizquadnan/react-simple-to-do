@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import DefaultLayout from "./layout/DefaultLayout";
 import AllTodoPage from "./pages/AllTodo";
 import AddTodoPage from "./pages/AddTodo";
-import TodayTodos from "./pages/TodayTodos";
+import EditTodoPage from "./pages/EditTodo";
 
 function App() {
   return (
@@ -15,8 +15,8 @@ function App() {
         <Route path="/new-todo">
           <AddTodoPage />
         </Route>
-        <Route path="/today">
-          <TodayTodos />
+        <Route path="/edit-todo">
+          <EditTodoPage />
         </Route>
       </Switch>
     </DefaultLayout>
