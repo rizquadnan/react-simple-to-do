@@ -1,25 +1,25 @@
+import { Route, Switch } from "react-router-dom";
 
-import { Route, Switch } from 'react-router-dom';
-
-import TodoListPage from './pages/TodoList';
-import AddTodoPage from './pages/AddTodo';
-import TodayTodos from './pages/TodayTodos';
+import DefaultLayout from "./layout/DefaultLayout";
+import TodoListPage from "./pages/TodoList";
+import AddTodoPage from "./pages/AddTodo";
+import TodayTodos from "./pages/TodayTodos";
 
 function App() {
   return (
-    <div>
+    <DefaultLayout>
       <Switch>
-        <Route path='/' exact>
+        <Route path="/" exact>
           <TodoListPage />
         </Route>
-        <Route path='/new-to-do'>
+        <Route path="/new-todo">
           <AddTodoPage />
         </Route>
-        <Route path='/today'>
+        <Route path="/today">
           <TodayTodos />
         </Route>
       </Switch>
-  </div>
+    </DefaultLayout>
   );
 }
 

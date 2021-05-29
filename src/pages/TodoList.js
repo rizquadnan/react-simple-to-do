@@ -1,5 +1,7 @@
 function TodoListPage () {
-  return <h1>All todos page</h1>
+  return (<div>
+    <h1>Your to do list</h1>
+  </div>)
 };
 
 export default TodoListPage;

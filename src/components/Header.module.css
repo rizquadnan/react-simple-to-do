@@ -1,0 +1,32 @@
+.container {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0.5rem 0;
+  background-color: #61dafb;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 0.5rem 1.5rem;
+}
+
+.title {
+  font-size: 2rem;
+}
+
+.navigation-list {
+  list-style-type: none;
+}
+
+.navigation-item {
+  display: inline-block;
+}
+
+.navigation-item a:hover,
+.navigation-item a:active {
+  opacity: 0.6;
+}
+
+
+.navigation-item:not(:last-child) {
+  margin-right: 1rem;
+}

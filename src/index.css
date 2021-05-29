@@ -13,3 +13,14 @@ body {
   margin: 0;
   font-family: sans-serif;
 }
+
+a,
+a:visited,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  padding: 0;
+}
