@@ -24,7 +24,7 @@ function AddTodoPage() {
   return (
     <div>
       <h1>Add New Todo</h1>
-      <TodoForm onAddTodo={onAddTodo}/>
+      <TodoForm onSubmit={onAddTodo}/>
     </div>
   );
 }

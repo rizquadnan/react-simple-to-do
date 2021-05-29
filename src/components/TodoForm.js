@@ -1,24 +1,32 @@
-import { useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 import Button from './Button';
 import classes from './TodoForm.module.css';
 
 function TodoForm(props) {
-  const titleInputRef = useRef();
-  const descriptionInputRef = useRef();
+  const [form, setFormData] = useState({
+    title: '',
+    description: ''
+  });
+
+  useEffect(() => {
+    setFormData({
+      title: props.title,
+      description: props.description,
+    })
+  }, [props.title, props.description]);
+
+  function onInput(value, type) {
+    setFormData({
+      ...form,
+      [`${type}`]: value
+    })
+  }
 
   function submitHandler(event) {
     event.preventDefault();
 
-    const enteredTitle = titleInputRef.current.value;
-    const enteredDescription = descriptionInputRef.current.value;
-
-    const todoData = {
-      title: enteredTitle,
-      description: enteredDescription,
-    };
-
-    props.onAddTodo(todoData);
+    props.onSubmit(form);
   }
 
 
@@ -26,12 +34,12 @@ function TodoForm(props) {
     <form className={classes.form} onSubmit={submitHandler}>
       <div className={classes.control}>
         <label htmlFor="title">Title</label>
-        <input type="text" required id="title" ref={titleInputRef}/>
+        <input type="text" required id="title" value={form.title} onChange={(e)=> onInput(e.target.value, 'title')} />
       </div>
 
       <div className={classes.control}>
         <label htmlFor="description">Description</label>
-        <textarea type="text" required id="description" rows="5" ref={descriptionInputRef}/>
+        <textarea type="text" required id="description" value={form.description} rows="5" onChange={(e)=> onInput(e.target.value, 'description')} />
       </div>
 
       <div className={classes.actions}>

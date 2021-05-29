@@ -14,9 +14,6 @@ function Header() {
           <li className={classes['navigation-item']}>
             <Link to='/new-todo'>Add new to do</Link>
           </li>
-          <li className={classes['navigation-item']}>
-            <Link to='/edit-todo'>Edit to do</Link>
-          </li>
         </ul>
       </nav>
     </header>

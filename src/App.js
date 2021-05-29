@@ -15,7 +15,7 @@ function App() {
         <Route path="/new-todo">
           <AddTodoPage />
         </Route>
-        <Route path="/edit-todo">
+        <Route path="/edit-todo/:id">
           <EditTodoPage />
         </Route>
       </Switch>

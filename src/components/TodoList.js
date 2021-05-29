@@ -5,11 +5,15 @@ function TodoList(props) {
     props.onDelete(id);
   }
 
+  function onClickEdit(id) {
+    props.onEdit(id);
+  }
+
   return (<div>
     <ul>
       {props.todos.map((todo) => {
         return (
-          <TodoItem key={todo.id} title={todo.title} description={todo.description} onEdit={props.onEdit} onDelete={() => onClickDelete(todo.id)} />
+          <TodoItem key={todo.id} title={todo.title} description={todo.description} onEdit={() => onClickEdit(todo.id)} onDelete={() => onClickDelete(todo.id)} />
         )
       })}
     </ul>
