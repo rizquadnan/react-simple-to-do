@@ -16,6 +16,8 @@ function TodoForm(props) {
       title: enteredTitle,
       description: enteredDescription,
     };
+
+    props.onAddTodo(todoData);
   }
 
 
