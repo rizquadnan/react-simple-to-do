@@ -1,21 +1,41 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 import classes from './Header.module.css';
+import HeaderNavList from './HeaderNavList';
+
 
 function Header() {
+  const [isOffCanvasMenuVisible, setOffCanvasMenuStatus] = useState(false);
+  
+  const offCanvasMenu =(
+    <nav className={classes['mobile-nav']} onClick={onClickBackdrop}>
+      <HeaderNavList />
+    </nav>
+  );
+
+  function onClickHamburger() {
+    setOffCanvasMenuStatus(true);
+  }
+
+  function onClickBackdrop() {
+    setOffCanvasMenuStatus(false);
+  }
+
   return (
     <header className={classes.container}>
       <span className={classes.title}>React to dos</span>
-      <nav>
-        <ul className={classes['navigation-list']}>
-          <li className={classes['navigation-item']}>
-            <Link to='/'>To do list</Link>
-          </li>
-          <li className={classes['navigation-item']}>
-            <Link to='/new-todo'>Add new to do</Link>
-          </li>
-        </ul>
+
+      <nav className={classes['desktop-nav']}>
+        <HeaderNavList />
       </nav>
+
+      {isOffCanvasMenuVisible && offCanvasMenu}
+
+      <div className={classes.hamburger} onClick={onClickHamburger} >
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </header>
   );
 }
