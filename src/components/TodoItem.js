@@ -16,7 +16,7 @@ function TodoItem(props) {
 
       <div className={classes.actions}>
         <Button onClick={props.onEdit}>Edit</Button>
-        <Button onClick={props.onDelete}>Delete</Button>
+        <Button onClick={props.onDelete}>Done</Button>
       </div>
     </div>
   );
