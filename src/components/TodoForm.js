@@ -29,6 +29,7 @@ function TodoForm(props) {
     props.onSubmit(form);
   }
 
+  const buttonLabel = props.isEdit ? 'Edit Todo' : 'Add Todo'
 
   return (
     <form className={classes.form} onSubmit={submitHandler}>
@@ -43,7 +44,7 @@ function TodoForm(props) {
       </div>
 
       <div className={classes.actions}>
-        <Button>Add Todo</Button>
+        <Button>{buttonLabel}</Button>
       </div>
     </form>
   )

@@ -28,6 +28,7 @@ function TodayTodosPage() {
   }, []);
 
   function onEditTodo(todo) {
+    setIsLoading(true);
     fetch(
       `${baseUrl}/todos/${id}.json`,
       {
@@ -35,7 +36,7 @@ function TodayTodosPage() {
         body: JSON.stringify(todo)
       }
     ).then(() => {
-      console.log('berhasil');
+      setIsLoading(false);
       history.replace('/');
     })
   }
@@ -50,11 +51,12 @@ function TodayTodosPage() {
 
   return (
     <div>
-      <h1>Add New Todo</h1>
+      <h1>Edit New Todo</h1>
       <TodoForm
         onSubmit={onEditTodo}
         title={todo.title}
         description={todo.description}
+        isEdit
       />
     </div>
   );
