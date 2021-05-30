@@ -11,7 +11,7 @@ function TodayTodosPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [todo, setTodo] = useState([]);
 
-  function loadTodo() {
+  useEffect(() => {
     setIsLoading(true);
     fetch(`${baseUrl}/todos/${id}.json`)
       .then((response) => {
@@ -21,11 +21,7 @@ function TodayTodosPage() {
         setIsLoading(false);
         setTodo(data);
       });
-  }
-
-  useEffect(() => {
-    loadTodo();
-  }, []);
+  }, [id]);
 
   function onEditTodo(todo) {
     setIsLoading(true);
