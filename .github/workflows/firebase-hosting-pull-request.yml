@@ -12,7 +12,7 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_REACT_SIMPLE_TODO_SPA }}'
-          projectId: react-simple-todo-spa
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_REACT_SIMPLE_TODOS }}'
+          projectId: react-simple-todos
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
