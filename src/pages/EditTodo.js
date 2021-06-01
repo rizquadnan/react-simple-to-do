@@ -33,7 +33,7 @@ function TodayTodosPage() {
       }
     ).then(() => {
       setIsLoading(false);
-      history.replace('/');
+      history.replace('/list');
     })
   }
 

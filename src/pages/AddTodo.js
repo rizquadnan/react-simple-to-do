@@ -17,7 +17,7 @@ function AddTodoPage() {
         }
       }
     ).then(() => {
-      history.replace('/');
+      history.replace('/list')
     });;
   }
 
