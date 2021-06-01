@@ -11,11 +11,8 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route path="/" exact>
-          <LoginPage />
-        </Route>
         <DefaultLayout>
-          <Route path="/todo" exact>
+          <Route path="/" exact>
             <AllTodoPage />
           </Route>
           <Route path="/new-todo">
