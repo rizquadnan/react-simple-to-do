@@ -48,7 +48,7 @@ function AllTodoPage () {
   }
 
   function onEdit(id) {
-    history.replace(`/edit-todo/${id}`)
+    history.replace(`/edit/${id}`)
   }
 
   useEffect(() => {

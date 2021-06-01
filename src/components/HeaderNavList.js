@@ -5,10 +5,10 @@ function HeaderNavList() {
   return (
     <ul className={classes['nav-list']}>
       <li className={classes['nav-item']}>
-        <Link to='/'>To do list</Link>
+        <Link to='/list'>To do list</Link>
       </li>
       <li className={classes['nav-item']}>
-        <Link to='/new-todo'>Add new to do</Link>
+        <Link to='/new'>Add new to do</Link>
       </li>
     </ul>
   )
