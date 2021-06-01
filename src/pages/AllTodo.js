@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import baseUrl from '../api/baseUrl';
+import { databaseRef } from '../index';
+
 import TodoList from '../components/TodoList';
 
 function AllTodoPage () {
@@ -12,13 +13,9 @@ function AllTodoPage () {
 
   function loadTodos() {
     setIsLoading(true);
-    fetch(
-      `${baseUrl}/todos.json`
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
+    databaseRef.child("todos").get().then((snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
         const todos = [];
 
         for (const key in data) {
@@ -32,17 +29,18 @@ function AllTodoPage () {
 
         setIsLoading(false);
         setTodos(todos);
-      });
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
   }
 
   function onDelete(id) {
     setIsLoading(true);
-    fetch(
-      `${baseUrl}/todos/${id}.json`,
-      {
-        method: 'DELETE',
-      }
-    ).then(() => {
+    
+    databaseRef.child(`todos/${id}`).remove().then(() => {
       loadTodos()
     });;
   }

@@ -1,24 +1,20 @@
 import { useHistory } from 'react-router-dom';
 
-import baseUrl from '../api/baseUrl';
+import { databaseRef } from '../index';
+
 import TodoForm from '../components/TodoForm';
 
 function AddTodoPage() {
   const history = useHistory();
 
   function onAddTodo(todo) {
-    fetch(
-      `${baseUrl}/todos.json`,
-      {
-        method: 'POST',
-        body: JSON.stringify(todo),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    ).then(() => {
+    const newKey = databaseRef.child('todo').push().key;
+
+    databaseRef.update({
+      [`/todos/${newKey}`]: todo 
+    }).then(() => {
       history.replace('/list')
-    });;
+    })
   }
 
   return (

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
-import baseUrl from "../api/baseUrl";
+import { databaseRef } from '../index';
 import TodoForm from "../components/TodoForm";
 
 function TodayTodosPage() {
@@ -13,25 +13,25 @@ function TodayTodosPage() {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`${baseUrl}/todos/${id}.json`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setIsLoading(false);
-        setTodo(data);
+    
+      databaseRef.child(`todos/${id}`).get().then((snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+  
+          setIsLoading(false);
+          setTodo(data);
+        } else {
+          console.log("No data available");
+        }
       });
   }, [id]);
 
   function onEditTodo(todo) {
     setIsLoading(true);
-    fetch(
-      `${baseUrl}/todos/${id}.json`,
-      {
-        method: 'PUT',
-        body: JSON.stringify(todo)
-      }
-    ).then(() => {
+    databaseRef.update({
+      [`/todos/${id}`]: todo
+    })
+    .then(() => {
       setIsLoading(false);
       history.replace('/list');
     })
