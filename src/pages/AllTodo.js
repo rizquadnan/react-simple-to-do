@@ -33,7 +33,7 @@ function AllTodoPage () {
         console.log("No data available");
       }
     }).catch((error) => {
-      console.error(error);
+      alert('Tidak bisa mendapat data, mohon refresh halaman')
     });
   }
 

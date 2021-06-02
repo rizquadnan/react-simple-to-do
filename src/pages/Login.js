@@ -1,10 +1,8 @@
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-
 import classes from "./Login.module.css";
 
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 import { auth } from '../index';
-
 const uiConfig = {
   // Popup signin flow rather than redirect flow.
   signInFlow: 'popup',
@@ -14,7 +12,7 @@ const uiConfig = {
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     firebase.auth.FacebookAuthProvider.PROVIDER_ID
-  ]
+  ],
 };
 
 function LoginPage() {
