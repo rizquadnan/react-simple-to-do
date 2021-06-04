@@ -1,8 +1,11 @@
-import { Route, Switch } from "react-router-dom";
-import { useContext } from "react";
+import {
+  Route,
+  Switch,
+} from "react-router-dom";
 
 import DefaultLayout from "./layout/DefaultLayout";
-import UserContext from './store/userContext';
+
+import ProtectedRoute from './middleware/ProtectedRoute';
 
 import LoginPage from "./pages/Login";
 import AllTodoPage from "./pages/AllTodo";
@@ -10,33 +13,23 @@ import AddTodoPage from "./pages/AddTodo";
 import EditTodoPage from "./pages/EditTodo";
 
 function App() {
-  const userCtx = useContext(UserContext);
-  if (userCtx.isSignedIn()) {
-    return (
-      <Switch>
-          <Route path="/" exact>
-            <LoginPage />
-          </Route>
-        <DefaultLayout>
-          <Route path="/list">
-            <AllTodoPage />
-          </Route>
-          <Route path="/new">
-            <AddTodoPage />
-          </Route>
-          <Route path="/edit/:id">
-            <EditTodoPage />
-          </Route>
-        </DefaultLayout>
-      </Switch>
-    )
-  }
-  else return (
-      <Switch>
-        <Route path="/" exact>
-          <LoginPage />
+  return (
+    <Switch>
+      <Route path="/" exact>
+        <LoginPage />
+      </Route>
+      <DefaultLayout>
+        <Route path="/list" redirectTo="/">
+          <AllTodoPage />
         </Route>
-      </Switch>
+        <Route path="/new" redirectTo="/">
+          <AddTodoPage />
+        </Route>
+        <Route path="/edit/:id" redirectTo="/">
+          <EditTodoPage />
+        </Route>
+      </DefaultLayout>
+    </Switch>
   );
 }
 

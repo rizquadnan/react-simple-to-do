@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { databaseRef } from '../index';
+import { databaseRef } from '../api/firebase';
 
 import TodoList from '../components/TodoList';
 

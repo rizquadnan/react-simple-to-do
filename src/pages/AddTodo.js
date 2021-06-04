@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 
-import { databaseRef } from '../index';
+import { databaseRef } from '../api/firebase';
 
 import TodoForm from '../components/TodoForm';
 

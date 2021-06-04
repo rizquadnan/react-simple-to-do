@@ -1,7 +1,7 @@
 import classes from './HeaderNavList.module.css';
 import { Link, useHistory } from 'react-router-dom';
 
-import { auth } from '../index';
+import { auth } from '../api/firebase';
 
 function HeaderNavList() {
   const history = useHistory();
