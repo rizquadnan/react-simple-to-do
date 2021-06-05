@@ -1,4 +1,3 @@
 # React simple todo
 
-https://react-simple-todo-spa.web.app/
-
+https://react-simple-todos.web.app/
