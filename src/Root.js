@@ -12,8 +12,11 @@ function Root() {
     const unsubscribeListener = auth.onAuthStateChanged(function(user) {
       setLoggedIn(!!user)
 
-      if (isLoggedIn) history.replace('/list');
-      else history.replace('/');
+      if (isLoggedIn) {
+        history.replace('/list');
+      } else {
+        history.replace('/');
+      }
     });
 
     return () => unsubscribeListener()

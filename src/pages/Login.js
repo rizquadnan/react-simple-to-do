@@ -7,8 +7,7 @@ import { auth } from "../api/firebase";
 const uiConfig = {
   signInFlow: "popup",
   signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID
   ],
   callbacks: {
     // Avoid redirects after sign-in.
@@ -19,6 +18,7 @@ const uiConfig = {
 function LoginPage() {
   return (
     <div className={classes.login}>
+      <h1>ToDoIt Application</h1>
       <StyledFirebaseAuth
         uiConfig={uiConfig}
         firebaseAuth={auth}
