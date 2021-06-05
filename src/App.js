@@ -1,11 +1,6 @@
-import {
-  Route,
-  Switch,
-} from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import DefaultLayout from "./layout/DefaultLayout";
-
-import ProtectedRoute from './middleware/ProtectedRoute';
 
 import LoginPage from "./pages/Login";
 import AllTodoPage from "./pages/AllTodo";

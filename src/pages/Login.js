@@ -23,11 +23,14 @@ function LoginPage() {
   const history = useHistory();
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    const unregisterObserver = auth.onAuthStateChanged((user) => {
       if (user) {
+
         history.replace('/list')
       }
     })
+
+    return () => unregisterObserver() 
   }, [history])
 
   return (
