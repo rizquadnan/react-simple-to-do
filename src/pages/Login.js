@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
-
 import classes from "./Login.module.css";
 
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
@@ -20,18 +17,6 @@ const uiConfig = {
 };
 
 function LoginPage() {
-  const history = useHistory();
-
-  useEffect(() => {
-    const unregisterObserver = auth.onAuthStateChanged((user) => {
-      if (user) {
-        history.replace('/list')
-      }
-    })
-
-    return () => unregisterObserver() 
-  }, [history])
-
   return (
     <div className={classes.login}>
       <StyledFirebaseAuth
