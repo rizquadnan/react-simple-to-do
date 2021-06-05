@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
-import { databaseRef } from '../api/firebase';
+import { auth, databaseRef } from '../api/firebase';
 import TodoForm from "../components/TodoForm";
 
 function TodayTodosPage() {
@@ -13,8 +13,9 @@ function TodayTodosPage() {
 
   useEffect(() => {
     setIsLoading(true);
-    
-      databaseRef.child(`todos/${id}`).get().then((snapshot) => {
+      const user = auth.currentUser;
+      
+      databaseRef.child(`users/${user.uid}/todos/${id}`).get().then((snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val();
   
@@ -28,8 +29,10 @@ function TodayTodosPage() {
 
   function onEditTodo(todo) {
     setIsLoading(true);
+    const user = auth.currentUser;
+    
     databaseRef.update({
-      [`/todos/${id}`]: todo
+      [`users/${user.uid}/todos/${id}`]: todo
     })
     .then(() => {
       setIsLoading(false);

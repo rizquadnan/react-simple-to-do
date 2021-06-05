@@ -1,20 +1,21 @@
 import { useHistory } from 'react-router-dom';
 
-import { databaseRef } from '../api/firebase';
+import { auth, databaseRef } from '../api/firebase';
 
 import TodoForm from '../components/TodoForm';
 
 function AddTodoPage() {
   const history = useHistory();
 
-  function onAddTodo(todo) {
-    const newKey = databaseRef.child('todo').push().key;
+  async function onAddTodo(todo) {
+    const user = auth.currentUser;
+    const newKey = databaseRef.child(`users/${user.uid}/todos`).push().key;
 
-    databaseRef.update({
-      [`/todos/${newKey}`]: todo 
-    }).then(() => {
-      history.replace('/list')
+    await databaseRef.update({
+      [`/users/${user.uid}/todos/${newKey}`]: todo 
     })
+
+    history.replace('/list');
   }
 
   return (

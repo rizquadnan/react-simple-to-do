@@ -15,7 +15,7 @@ const uiConfig = {
   ],
   callbacks: {
     // Avoid redirects after sign-in.
-    signInSuccessWithAuthResult: () => false,
+    signInSuccessWithAuthResult: async () => false
   },
 };
 
@@ -25,7 +25,6 @@ function LoginPage() {
   useEffect(() => {
     const unregisterObserver = auth.onAuthStateChanged((user) => {
       if (user) {
-
         history.replace('/list')
       }
     })
