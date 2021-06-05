@@ -1,59 +1,75 @@
-import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
-import baseUrl from '../api/baseUrl';
-import TodoList from '../components/TodoList';
+import { databaseRef, auth } from "../api/firebase";
 
-function AllTodoPage () {
+import TodoList from "../components/TodoList";
+
+function AllTodoPage() {
   const history = useHistory();
 
   const [isLoading, setIsLoading] = useState(true);
   const [todos, setTodos] = useState([]);
 
-  function loadTodos() {
+  useEffect(() => {
+    loadTodos();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  async function loadTodos() {
     setIsLoading(true);
-    fetch(
-      `${baseUrl}/todos.json`
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        const todos = [];
+    const currentUser = auth.currentUser;
+    const data = await databaseRef
+      .child(`users/${currentUser.uid}`)
+      .get();
 
-        for (const key in data) {
-          const meetup = {
-            id: key,
-            ...data[key]
-          };
+    if (data.exists()) {
+      const todosResponse = data.val().todos;
+      if (todosResponse) {
+        setTodos(formatResponseTodos(todosResponse));
+      }
+    } else {
+      await createUser(currentUser);
+    }
 
-          todos.push(meetup);
-        }
-
-        setIsLoading(false);
-        setTodos(todos);
-      });
+    setIsLoading(false);
   }
 
-  function onDelete(id) {
+  function formatResponseTodos(response) {
+    const todos = [];
+
+    for (const key in response) {
+      const meetup = {
+        id: key,
+        ...response[key],
+      };
+
+      todos.push(meetup);
+    }
+
+    return todos;
+  }
+
+  async function createUser({ uid }) {
+    await databaseRef.update({
+      [`/users/${uid}`]: { todos: "" },
+    });
+  }
+
+  async function onDelete(id) {
     setIsLoading(true);
-    fetch(
-      `${baseUrl}/todos/${id}.json`,
-      {
-        method: 'DELETE',
-      }
-    ).then(() => {
-      loadTodos()
-    });;
+
+    const user = auth.currentUser;
+
+    await databaseRef
+      .child(`users/${user.uid}/todos/${id}`)
+      .remove();
+    await loadTodos();
   }
 
   function onEdit(id) {
-    history.replace(`/edit/${id}`)
+    history.replace(`/edit/${id}`);
   }
-
-  useEffect(() => {
-    loadTodos()
-  }, []);
 
   if (isLoading) {
     return (
@@ -63,11 +79,21 @@ function AllTodoPage () {
     );
   }
 
-  return (<div>
-    <h1>Your to do list</h1>
+  return (
+    <div>
+      <h1>Your to do list</h1>
 
-    <TodoList todos={todos} onEdit={onEdit} onDelete={onDelete} />
-  </div>)
-};
+      {todos.length > 0 && (
+        <TodoList
+          todos={todos}
+          onEdit={onEdit}
+          onDelete={onDelete}
+        />
+      )}
+
+      {todos.length === 0 && <p>There is no to do</p>}
+    </div>
+  );
+}
 
 export default AllTodoPage;

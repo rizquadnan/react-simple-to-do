@@ -23,7 +23,7 @@ function Header() {
 
   return (
     <header className={classes.container}>
-      <span className={classes.title}>React to dos</span>
+      <span className={classes.title}>ToDoIt</span>
 
       <nav className={classes['desktop-nav']}>
         <HeaderNavList />

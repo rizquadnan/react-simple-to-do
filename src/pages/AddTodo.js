@@ -1,24 +1,21 @@
 import { useHistory } from 'react-router-dom';
 
-import baseUrl from '../api/baseUrl';
+import { auth, databaseRef } from '../api/firebase';
+
 import TodoForm from '../components/TodoForm';
 
 function AddTodoPage() {
   const history = useHistory();
 
-  function onAddTodo(todo) {
-    fetch(
-      `${baseUrl}/todos.json`,
-      {
-        method: 'POST',
-        body: JSON.stringify(todo),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    ).then(() => {
-      history.replace('/list')
-    });;
+  async function onAddTodo(todo) {
+    const user = auth.currentUser;
+    const newKey = databaseRef.child(`users/${user.uid}/todos`).push().key;
+
+    await databaseRef.update({
+      [`/users/${user.uid}/todos/${newKey}`]: todo 
+    })
+
+    history.replace('/list');
   }
 
   return (

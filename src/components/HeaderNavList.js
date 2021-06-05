@@ -1,7 +1,17 @@
 import classes from './HeaderNavList.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+
+import { auth } from '../api/firebase';
 
 function HeaderNavList() {
+  const history = useHistory();
+
+  function onSignOut() {
+    auth.signOut();
+
+    history.replace('/');
+  }
+
   return (
     <ul className={classes['nav-list']}>
       <li className={classes['nav-item']}>
@@ -9,6 +19,9 @@ function HeaderNavList() {
       </li>
       <li className={classes['nav-item']}>
         <Link to='/new'>Add new to do</Link>
+      </li>
+      <li className={classes['nav-item']}>
+        <span onClick={onSignOut}>Logout</span>
       </li>
     </ul>
   )
